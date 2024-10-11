@@ -130,8 +130,8 @@ class SafeFileHandler(FileHandler):
 # 2018.2.13 edit, remove thread watch
 # 2018.4.23 edit，#19023 增加 docstring
 # 2019.7.16 v1.1.15 #240 edit by Hu Jun
-def set_log_file(local_file=None, file_name_format='%date-%project_name-%log'):
-
+# 2024.10.11 edit 增加encoding
+def set_log_file(local_file=None, file_name_format='%date-%project_name-%log', encoding=None):
     """
     设置日志记录，按照每天一个文件，记录包括 info 以及以上级别的内容；
     日志格式采取日志文件名直接加上日期，比如 2018-05-27.fish_test.log
@@ -139,6 +139,7 @@ def set_log_file(local_file=None, file_name_format='%date-%project_name-%log'):
     :param:
         * local_fie: (string) 日志文件名
         * file_name_format: (string) 日志文件名格式
+        * encoding: (string) 日志文件编码
     :return: 无
 
     举例如下::
@@ -175,7 +176,7 @@ def set_log_file(local_file=None, file_name_format='%date-%project_name-%log'):
     
     # time rotating file handler
     # _tfh = TimedRotatingFileHandler(default_log_file, when="midnight")
-    _tfh = SafeFileHandler(filename=default_log_file, file_name_format=file_name_format)
+    _tfh = SafeFileHandler(filename=default_log_file, file_name_format=file_name_format, encoding=None)
     _tfh.setLevel(logging.INFO)
 
     _formatter = logging.Formatter(
